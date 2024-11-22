@@ -1,13 +1,13 @@
-import { Star } from "lucide-react";
+import { useState } from "react";
+import { Search } from "../../components";
 import {
   useQueryDebut,
   useQueryNowPlaying,
   useQueryPopular,
   useQueryTopRated,
 } from "../../api/queries";
+import { Popcorn, Star } from "lucide-react";
 import styles from "./MovieGrid.module.css";
-import { Search } from "../../components";
-import { useState } from "react";
 
 const MovieGrid = () => {
   const [selectedOption, setSelectedOption] = useState("1");
@@ -58,7 +58,13 @@ const MovieGrid = () => {
         {selectedOption === "3" && "Estrenos"}
         {selectedOption === "4" && "En cartelera"}
       </h2>
-      <div className={isLoading ? styles.moviesDisabled : styles.moviesActive}>
+      <div
+        className={
+          isLoading || !movies.length
+            ? styles.moviesDisabled
+            : styles.moviesActive
+        }
+      >
         {isLoading ? (
           <div className={styles.containerLoader}>
             <div className={styles.loader} />
@@ -82,7 +88,10 @@ const MovieGrid = () => {
             </div>
           ))
         ) : (
-          <h1>Sin películas</h1>
+          <div className={styles.containerNoFoundMovie}>
+            <h1>Sin películas</h1>
+            <Popcorn size={70} />
+          </div>
         )}
       </div>
     </div>
