@@ -18,7 +18,7 @@ export default function MovieGrid() {
               />
               <h3 className={styles.movieTitle}>{movie.title}</h3>
               <div className={styles.movieOverlay}>
-                <span>Califacion: {movie.vote_average}</span>
+                <span>Califación: {movie.vote_average}</span>
                 <span>
                   <Star color="#FFE31A" />
                 </span>

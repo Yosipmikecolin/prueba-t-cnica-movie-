@@ -70,6 +70,11 @@
   position: absolute;
   bottom: 10px;
   cursor: pointer;
+  transition: 500ms ease;
+}
+
+.buttonMovie:hover {
+  background-color: #b1911f;
 }
 
 @media (min-width: 640px) {
