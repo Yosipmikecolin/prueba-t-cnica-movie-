@@ -7,30 +7,42 @@ import {
 } from "../../api/queries";
 import styles from "./MovieGrid.module.css";
 import { Search } from "../../components";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 
-export default function MovieGrid() {
+const MovieGrid = () => {
   const [selectedOption, setSelectedOption] = useState("1");
 
-  const { data: top } = useQueryTopRated(1);
-  const { data: popular } = useQueryPopular(1);
-  const { data: debuts } = useQueryDebut(1);
-  const { data: playing } = useQueryNowPlaying(1);
+  const { data: top, isLoading: isLoadingTop } = useQueryTopRated(
+    1,
+    selectedOption === "1"
+  );
+  const { data: popular, isLoading: isLoadingPopular } = useQueryPopular(
+    1,
+    selectedOption === "2"
+  );
+  const { data: debuts, isLoading: isLoadingDebuts } = useQueryDebut(
+    1,
+    selectedOption === "3"
+  );
+  const { data: playing, isLoading: isLoadingPlaying } = useQueryNowPlaying(
+    1,
+    selectedOption === "4"
+  );
 
-  const movieData = useMemo(() => {
+  const { movies, isLoading } = (() => {
     switch (selectedOption) {
       case "1":
-        return top?.results ?? [];
+        return { movies: top?.results ?? [], isLoading: isLoadingTop };
       case "2":
-        return popular?.results ?? [];
+        return { movies: popular?.results ?? [], isLoading: isLoadingPopular };
       case "3":
-        return debuts?.results ?? [];
+        return { movies: debuts?.results ?? [], isLoading: isLoadingDebuts };
       case "4":
-        return playing?.results ?? [];
+        return { movies: playing?.results ?? [], isLoading: isLoadingPlaying };
       default:
-        return [];
+        return { movies: [], isLoading: false };
     }
-  }, [selectedOption, top, popular, debuts, playing]);
+  })();
 
   return (
     <div className={styles.grid}>
@@ -46,9 +58,13 @@ export default function MovieGrid() {
         {selectedOption === "3" && "Estrenos"}
         {selectedOption === "4" && "En cartelera"}
       </h2>
-      <div className={styles.movies}>
-        {movieData.length ? (
-          movieData.map((movie) => (
+      <div className={isLoading ? styles.moviesDisabled : styles.moviesActive}>
+        {isLoading ? (
+          <div className={styles.containerLoader}>
+            <div className={styles.loader} />
+          </div>
+        ) : movies.length ? (
+          movies.map((movie) => (
             <div key={movie.id} className={styles.movie}>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
@@ -71,4 +87,6 @@ export default function MovieGrid() {
       </div>
     </div>
   );
-}
+};
+
+export default MovieGrid;
