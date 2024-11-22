@@ -1,15 +1,8 @@
 .container {
   height: auto;
   display: flex;
+  gap: 20px;
   padding: 1.5rem;
-}
-
-.card {
-  width: 100%;
-  max-width: 28rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
 }
 
 .title {
@@ -109,6 +102,10 @@
 }
 
 @media (max-width: 1013px) {
+  .container {
+    flex-wrap: wrap;
+  }
+
   .optionsList {
     flex-wrap: wrap;
     justify-content: center;
