@@ -1,31 +1,38 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./MovieSlider.module.css";
+import ImgAvatar from "../../assets/avatar.jpg";
+import ImgAlien from "../../assets/alien.webp";
+import ImgDune from "../../assets/dune.jpg";
+import ImgTerrifier from "../../assets/terrifier.jpg";
 
 const slides = [
   {
     id: 1,
-    title: "Dune: Part Two",
+    title: "Avatar 2",
     description:
-      "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
-    image:
-      "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=2940&q=80",
+      "Jake Sully y Ney'tiri han formado una familia y hacen todo lo posible por permanecer juntos. Sin embargo, deben abandonar su hogar y explorar las regiones de Pandora cuando una antigua amenaza reaparece.",
+    image: ImgAvatar,
   },
   {
     id: 2,
-    title: "The Batman",
+    title: "Dune 2",
     description:
-      "When a killer targets Gotham's elite with a series of sadistic machinations, Batman must forge new relationships, unmask the culprit, and bring justice.",
-    image:
-      "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&w=2940&q=80",
+      "Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia. Paul se enfrenta a una elección entre el amor de su vida y el destino del universo, y debe evitar un futuro terrible.",
+    image: ImgDune,
   },
   {
     id: 3,
-    title: "Inception",
+    title: "Alien Romulus",
     description:
-      "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-    image:
-      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=2940&q=80",
+      "Un grupo de colonos espaciales se enfrenta a la criatura más aterradora del universo en una nave espacial abandonada a la que han accedido para recuperar cámaras de criostasis, con las que piensan huir a un planeta lejano.",
+    image: ImgAlien,
+  },
+  {
+    id: 4,
+    title: "Terrifier 3",
+    description:
+      "Terrifier 3 es una película de slasher y gore estadounidense de 2024, dirigida y escrita por Damien Leone. Está protagonizada por Lauren LaVera, Elliott Fullam, David Howard Thornton y Samantha Scaffidi, quienes repiten sus papeles de películas anteriores.",
+    image: ImgTerrifier,
   },
 ];
 
@@ -39,14 +46,9 @@ export default function MovieSlider() {
     return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const selectMovie = (id: number) => {
+    setCurrentSlide(id);
   };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   return (
     <div className={styles.slider}>
       {slides.map((slide, index) => (
@@ -68,12 +70,17 @@ export default function MovieSlider() {
         </div>
       ))}
       <div className={styles.sliderNav}>
-        <button onClick={prevSlide} className={styles.navButton}>
-          <ChevronLeft size={24} />
-        </button>
-        <button onClick={nextSlide} className={styles.navButton}>
-          <ChevronRight size={24} />
-        </button>
+        {slides.map((movie) => (
+          <button
+            key={movie.id}
+            onClick={() => selectMovie(movie.id - 1)}
+            className={
+              currentSlide + 1 === movie.id
+                ? styles["navButton-active"]
+                : styles["navButton-disabled"]
+            }
+          ></button>
+        ))}
       </div>
     </div>
   );
