@@ -8,7 +8,7 @@
   margin-bottom: 2rem;
   font-size: 1.875rem;
   font-weight: 700;
-  color: #111827;
+  color: white;
 }
 
 .movies {
@@ -22,37 +22,54 @@
   overflow: hidden;
   border-radius: 0.5rem;
   transition: transform 300ms;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  height: 450px;
+  position: relative;
+  transition: 500ms ease;
+  bottom: 0px;
 }
 
 .movie:hover {
-  transform: scale(1.05);
+  bottom: 15px;
 }
 
 .movieImage {
   width: 100%;
   aspect-ratio: 2/3;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .movieOverlay {
-  position: absolute;
-  inset: 0;
   display: flex;
-  align-items: flex-end;
-  padding: 1rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  opacity: 0;
-  transition: opacity 300ms;
-}
-
-.movie:hover .movieOverlay {
-  opacity: 1;
+  align-items: center;
+  gap: 10px;
 }
 
 .movieTitle {
   font-size: 0.875rem;
   font-weight: 500;
   color: white;
+  margin-top: 10px;
+}
+
+.buttonMovie {
+  background-color: #f3c623;
+  border: none;
+  padding: 6px;
+  color: black;
+  box-sizing: border-box;
+  left: 10px;
+  right: 10px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 10px;
+  cursor: pointer;
 }
 
 @media (min-width: 640px) {

@@ -19,17 +19,21 @@
   src: url("./fonts/Poppins-Bold.ttf") format("truetype");
 }
 
+body{
+  background-color: rgb(36, 35, 35);
+}
+
 h1,
-h2,
-h3 {
+h2 {
   font-family: "Poppins-Bold";
 }
 
 p,
 span {
   font-family: "Poppins-Regular";
+  color: white;
 }
 
-button {
+button,h3 {
   font-family: "Poppins-Medium";
 }

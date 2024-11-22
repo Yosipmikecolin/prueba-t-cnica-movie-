@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import { useQueryTopRated } from "../../api/queries";
 import styles from "./MovieGrid.module.css";
 
@@ -15,9 +16,14 @@ export default function MovieGrid() {
                 alt={movie.title}
                 className={styles.movieImage}
               />
+              <h3 className={styles.movieTitle}>{movie.title}</h3>
               <div className={styles.movieOverlay}>
-                <h3 className={styles.movieTitle}>{movie.title}</h3>
+                <span>Califacion: {movie.vote_average}</span>
+                <span>
+                  <Star color="#FFE31A" />
+                </span>
               </div>
+              <button className={styles.buttonMovie}>Ver detalles</button>
             </div>
           ))
         ) : (
