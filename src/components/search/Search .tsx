@@ -2,28 +2,36 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import styles from "./Search.module.css";
 
-interface Option {
-  id: string;
-  label: string;
+interface Props {
+  selectedOption: string;
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const options: Option[] = [
+const options = [
   { id: "1", label: "Top" },
   { id: "2", label: "Populares" },
-  { id: "3", label: "Extrenos" },
-  { id: "4", label: "Cartelera" },
+  { id: "3", label: "Estrenos" },
+  { id: "4", label: "En cartelera" },
 ];
 
-const Search = () => {
-  const [selectedOption, setSelectedOption] = useState("1");
+const Search = ({ selectedOption, setSelectedOption }: Props) => {
+  const [search, setSearch] = useState("");
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearch(value);
+    setSelectedOption(value === "" ? "1" : "0");
+  };
 
   return (
     <div className={styles.container}>
+      <input
+        value={search}
+        placeholder="Buscar película"
+        className={styles["input-search"]}
+        onChange={onChange}
+      />
       <div className={styles.optionsList}>
-        <input
-          placeholder="Buscar pelicula"
-          className={styles["input-search"]}
-        />
         {options.map((option) => (
           <label key={option.id} className={styles.option}>
             <div className={styles.checkboxWrapper}>

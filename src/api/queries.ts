@@ -1,10 +1,42 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMoviesTopRated } from "./request";
+import {
+  getMoviesDebut,
+  getMoviesNowPlaying,
+  getMoviesPopular,
+  getMoviesTopRated,
+} from "./request";
 
 export const useQueryTopRated = (currentPage: number) => {
   return useQuery({
     queryKey: ["movies_top_rated", currentPage],
     queryFn: () => getMoviesTopRated(currentPage),
+    refetchOnWindowFocus: false,
+    enabled: currentPage > 0,
+  });
+};
+
+export const useQueryPopular = (currentPage: number) => {
+  return useQuery({
+    queryKey: ["movies_popular", currentPage],
+    queryFn: () => getMoviesPopular(currentPage),
+    refetchOnWindowFocus: false,
+    enabled: currentPage > 0,
+  });
+};
+
+export const useQueryDebut = (currentPage: number) => {
+  return useQuery({
+    queryKey: ["movies_debut", currentPage],
+    queryFn: () => getMoviesDebut(currentPage),
+    refetchOnWindowFocus: false,
+    enabled: currentPage > 0,
+  });
+};
+
+export const useQueryNowPlaying = (currentPage: number) => {
+  return useQuery({
+    queryKey: ["movies_now_playing", currentPage],
+    queryFn: () => getMoviesNowPlaying(currentPage),
     refetchOnWindowFocus: false,
     enabled: currentPage > 0,
   });
