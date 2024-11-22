@@ -58,6 +58,13 @@
   margin-top: 10px;
 }
 
+.siverBar {
+  background-color: rgb(46, 46, 46);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
 .buttonMovie {
   background-color: #f3c623;
   border: none;

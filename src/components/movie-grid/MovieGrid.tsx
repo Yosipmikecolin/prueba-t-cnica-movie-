@@ -1,11 +1,15 @@
 import { Star } from "lucide-react";
 import { useQueryTopRated } from "../../api/queries";
 import styles from "./MovieGrid.module.css";
+import { Search } from "../../components";
 
 export default function MovieGrid() {
   const { data: movies } = useQueryTopRated(1);
   return (
     <div className={styles.grid}>
+      <div className={styles.siverBar}>
+        <Search />
+      </div>
       <h2 className={styles.title}>Mas valoradas</h2>
       <div className={styles.movies}>
         {movies?.results.length ? (

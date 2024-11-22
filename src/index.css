@@ -29,7 +29,7 @@ h2 {
 }
 
 p,
-span {
+span,input {
   font-family: "Poppins-Regular";
   color: white;
 }
