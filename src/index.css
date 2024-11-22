@@ -3,3 +3,33 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url("./fonts/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url("./fonts/Poppins-Bold.ttf") format("truetype");
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Poppins-Bold";
+}
+
+p,
+span {
+  font-family: "Poppins-Regular";
+}
+
+button {
+  font-family: "Poppins-Medium";
+}
