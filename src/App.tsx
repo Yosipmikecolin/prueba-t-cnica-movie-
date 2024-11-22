@@ -1,8 +1,11 @@
+import { MovieGrid, MovieSlider } from "./components";
+
 function App() {
   return (
-    <>
-      <h1>Hola mundo</h1>
-    </>
+    <main className="min-h-screen bg-gray-50">
+      <MovieSlider />
+      <MovieGrid />
+    </main>
   );
 }
 
