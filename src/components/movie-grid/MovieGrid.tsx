@@ -122,15 +122,9 @@ const MovieGrid = () => {
                   <div className={styles.containerImage}>
                     <div className={styles.skeleton} />
                     <img
-                      src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                      src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                       alt={movie.title}
                       className={styles.movieImage}
-                      onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                        e.currentTarget.style.opacity = "1";
-                        (
-                          e.currentTarget.previousSibling as HTMLElement
-                        ).style.display = "none";
-                      }}
                     />
                   </div>
                 ) : (
