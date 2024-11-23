@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./Pagination.module.css";
+import { useEffect, useState } from "react";
 
 interface PaginationProps {
   currentPage: number;
@@ -12,9 +13,10 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
+  const [max, setMax] = useState(5);
   const getVisiblePages = () => {
     const pages = [];
-    const maxVisible = 5;
+    const maxVisible = max;
     const halfVisible = Math.floor(maxVisible / 2);
 
     let start = Math.max(1, currentPage - halfVisible);
@@ -31,6 +33,24 @@ const Pagination = ({
   };
 
   const visiblePages = getVisiblePages();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 445) {
+        setMax(3);
+      } else {
+        setMax(5);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <nav className={styles.container}>
       <button

@@ -138,6 +138,12 @@
   }
 }
 
+@media (max-width: 445px) {
+  .moviesActive {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 @media (min-width: 640px) {
   .moviesActive {
     grid-template-columns: repeat(3, 1fr);
