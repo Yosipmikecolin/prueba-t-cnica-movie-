@@ -138,9 +138,24 @@
   }
 }
 
+@media (max-width: 351px) {
+  .movie {
+    height: 250px;
+  }
+}
+
 @media (max-width: 445px) {
   .moviesActive {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .movieImage {
+    width: 100%;
+    aspect-ratio: initial;
+  }
+
+  .movie {
+    height: 320px;
   }
 }
 
