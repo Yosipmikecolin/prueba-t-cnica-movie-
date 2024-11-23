@@ -1,14 +1,22 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MovieGrid } from "./components";
+import { NoFound } from "./components";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Movies } from "./views";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <main>
-        <MovieGrid />
-      </main>
+      <BrowserRouter>
+        <main>
+          <Routes>
+            <Route path="/" element={<Movies />} />
+            <Route path="/movie/:id" element={<h1>Detalles</h1>} />
+            <Route path="*" element={<NoFound />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }
