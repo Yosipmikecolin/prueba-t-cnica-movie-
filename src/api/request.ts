@@ -1,4 +1,4 @@
-import { MoviesTopRated } from "../interfaces";
+import { Movie, MoviesTopRated } from "../interfaces";
 import { axiosConfig, axiosConfigSearch } from "./config";
 
 export const getMoviesTopRated = async (page: number) => {
@@ -43,5 +43,10 @@ export const searchMovies = async (search: string, page: number) => {
       `language=es-ES&query=${search}&page=${page}`
     )
   ).data;
+  return result;
+};
+
+export const getMovieById = async (id: number) => {
+  const result = (await axiosConfig.get<Movie>(`/${id}`)).data;
   return result;
 };

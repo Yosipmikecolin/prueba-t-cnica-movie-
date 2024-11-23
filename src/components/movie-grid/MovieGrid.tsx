@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Pagination, Search } from "../../components";
 import {
   useQueryDebut,
@@ -9,13 +9,15 @@ import {
 } from "../../api/queries";
 import { Popcorn, Star } from "lucide-react";
 import styles from "./MovieGrid.module.css";
-import { useMovie } from "../../hooks/useMovie";
+import { useId } from "../../hooks/useId";
+import { useNavigate } from "react-router-dom";
 
 const MovieGrid = () => {
   const [selectedOption, setSelectedOption] = useState("2");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const { setMovie } = useMovie();
+  const navigate = useNavigate();
+  const { setId } = useId();
 
   const {
     data: moviesSearch,
@@ -87,6 +89,12 @@ const MovieGrid = () => {
         return { movies: { result: [], total_pages: 0 }, isLoading: false };
     }
   })();
+
+  const seeDetails = useCallback((id: number) => {
+    setId(id);
+    navigate(`/movie/${id}`);
+  }, []);
+
   return (
     <div className={styles.grid}>
       <div className={styles.siverBar}>
@@ -144,7 +152,7 @@ const MovieGrid = () => {
                 </div>
                 <button
                   className={styles.buttonMovie}
-                  onClick={() => setMovie(movie)}
+                  onClick={() => seeDetails(movie.id)}
                 >
                   Ver detalles
                 </button>

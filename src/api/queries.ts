@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  getMovieById,
   getMoviesDebut,
   getMoviesNowPlaying,
   getMoviesPopular,
@@ -53,5 +54,13 @@ export const useQuerySearchMovies = (
     queryFn: () => searchMovies(search, currentPage),
     refetchOnWindowFocus: false,
     enabled: currentPage > 0 && enabled,
+  });
+};
+
+export const useQueryMovie = (id: number) => {
+  return useQuery({
+    queryKey: ["movie", id],
+    queryFn: () => getMovieById(id),
+    refetchOnWindowFocus: false,
   });
 };
