@@ -93,11 +93,18 @@ const MovieGrid = () => {
         ) : movies.length ? (
           movies.map((movie) => (
             <div key={movie.id} className={styles.movie}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                alt={movie.title}
-                className={styles.movieImage}
-              />
+              {movie.backdrop_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                  alt={movie.title}
+                  className={styles.movieImage}
+                />
+              ) : (
+                <div className={styles.noImage}>
+                  <h3>Sin imagen</h3>
+                </div>
+              )}
+
               <h3 className={styles.movieTitle}>{movie.title}</h3>
               <div className={styles.movieOverlay}>
                 <span>Calificación: {movie.vote_average}</span>
