@@ -1,26 +1,33 @@
-import { useState } from "react";
 import { Check } from "lucide-react";
 import styles from "./Search.module.css";
 
 interface Props {
+  search: string;
+  refetch: () => void;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
   selectedOption: string;
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const options = [
-  { id: "1", label: "Top" },
-  { id: "2", label: "Populares" },
-  { id: "3", label: "Estrenos" },
-  { id: "4", label: "En cartelera" },
+  { id: "2", label: "Top" },
+  { id: "3", label: "Populares" },
+  { id: "4", label: "Estrenos" },
+  { id: "5", label: "En cartelera" },
 ];
 
-const Search = ({ selectedOption, setSelectedOption }: Props) => {
-  const [search, setSearch] = useState("");
-
+const Search = ({
+  search,
+  refetch,
+  setSearch,
+  selectedOption,
+  setSelectedOption,
+}: Props) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSearch(value);
-    setSelectedOption(value === "" ? "1" : "0");
+    setSearch(value.trim());
+    refetch();
+    setSelectedOption(value !== "" ? "1" : "2");
   };
 
   return (
@@ -49,7 +56,9 @@ const Search = ({ selectedOption, setSelectedOption }: Props) => {
               type="radio"
               className={styles.hiddenInput}
               checked={selectedOption === option.id}
-              onChange={() => setSelectedOption(option.id)}
+              onChange={() => {
+                setSelectedOption(option.id), setSearch("");
+              }}
               name="options"
               value={option.id}
             />

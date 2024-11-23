@@ -4,40 +4,57 @@ import {
   useQueryDebut,
   useQueryNowPlaying,
   useQueryPopular,
+  useQuerySearchMovies,
   useQueryTopRated,
 } from "../../api/queries";
 import { Popcorn, Star } from "lucide-react";
 import styles from "./MovieGrid.module.css";
 
 const MovieGrid = () => {
-  const [selectedOption, setSelectedOption] = useState("1");
+  const [selectedOption, setSelectedOption] = useState("2");
+  const [search, setSearch] = useState("");
+
+  const {
+    data: moviesSearch,
+    isLoading: isLoadingSearch,
+    refetch,
+  } = useQuerySearchMovies(
+    search,
+    1,
+    selectedOption === "1" && search.trim() !== ""
+  );
 
   const { data: top, isLoading: isLoadingTop } = useQueryTopRated(
     1,
-    selectedOption === "1"
+    selectedOption === "2"
   );
   const { data: popular, isLoading: isLoadingPopular } = useQueryPopular(
     1,
-    selectedOption === "2"
+    selectedOption === "3"
   );
   const { data: debuts, isLoading: isLoadingDebuts } = useQueryDebut(
     1,
-    selectedOption === "3"
+    selectedOption === "4"
   );
   const { data: playing, isLoading: isLoadingPlaying } = useQueryNowPlaying(
     1,
-    selectedOption === "4"
+    selectedOption === "5"
   );
 
   const { movies, isLoading } = (() => {
     switch (selectedOption) {
       case "1":
-        return { movies: top?.results ?? [], isLoading: isLoadingTop };
+        return {
+          movies: moviesSearch?.results ?? [],
+          isLoading: isLoadingSearch,
+        };
       case "2":
-        return { movies: popular?.results ?? [], isLoading: isLoadingPopular };
+        return { movies: top?.results ?? [], isLoading: isLoadingTop };
       case "3":
-        return { movies: debuts?.results ?? [], isLoading: isLoadingDebuts };
+        return { movies: popular?.results ?? [], isLoading: isLoadingPopular };
       case "4":
+        return { movies: debuts?.results ?? [], isLoading: isLoadingDebuts };
+      case "5":
         return { movies: playing?.results ?? [], isLoading: isLoadingPlaying };
       default:
         return { movies: [], isLoading: false };
@@ -48,15 +65,19 @@ const MovieGrid = () => {
     <div className={styles.grid}>
       <div className={styles.siverBar}>
         <Search
+          search={search}
+          refetch={refetch}
+          setSearch={setSearch}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
         />
       </div>
       <h2 className={styles.title}>
-        {selectedOption === "1" && "Más valoradas"}
-        {selectedOption === "2" && "Populares"}
-        {selectedOption === "3" && "Estrenos"}
-        {selectedOption === "4" && "En cartelera"}
+        {selectedOption === "1" && "Busqueda"}
+        {selectedOption === "2" && "Más valoradas"}
+        {selectedOption === "3" && "Populares"}
+        {selectedOption === "4" && "Estrenos"}
+        {selectedOption === "5" && "En cartelera"}
       </h2>
       <div
         className={
