@@ -9,11 +9,13 @@ import {
 } from "../../api/queries";
 import { Popcorn, Star } from "lucide-react";
 import styles from "./MovieGrid.module.css";
+import { useMovie } from "../../hooks/useMovie";
 
 const MovieGrid = () => {
   const [selectedOption, setSelectedOption] = useState("2");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const { setMovie } = useMovie();
 
   const {
     data: moviesSearch,
@@ -140,7 +142,12 @@ const MovieGrid = () => {
                     <Star color="#FFE31A" />
                   </span>
                 </div>
-                <button className={styles.buttonMovie}>Ver detalles</button>
+                <button
+                  className={styles.buttonMovie}
+                  onClick={() => setMovie(movie)}
+                >
+                  Ver detalles
+                </button>
               </div>
             ))}
           </>

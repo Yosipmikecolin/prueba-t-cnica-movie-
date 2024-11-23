@@ -1,12 +1,5 @@
 import { create } from "zustand";
-
-interface Movie {
-  overview: string;
-  poster_path: string;
-  title: string;
-  popularity: number;
-  release_date: string;
-}
+import { Movie } from "../interfaces";
 
 interface Props {
   movie?: Movie;
