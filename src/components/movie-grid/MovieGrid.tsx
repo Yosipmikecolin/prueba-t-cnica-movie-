@@ -119,11 +119,20 @@ const MovieGrid = () => {
             {movies.result.map((movie) => (
               <div key={movie.id} className={styles.movie}>
                 {movie.backdrop_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                    alt={movie.title}
-                    className={styles.movieImage}
-                  />
+                  <div className={styles.containerImage}>
+                    <div className={styles.skeleton} />
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                      alt={movie.title}
+                      className={styles.movieImage}
+                      onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                        e.currentTarget.style.opacity = "1";
+                        (
+                          e.currentTarget.previousSibling as HTMLElement
+                        ).style.display = "none";
+                      }}
+                    />
+                  </div>
                 ) : (
                   <div className={styles.noImage}>
                     <h3>Sin imagen</h3>
