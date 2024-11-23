@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search } from "../../components";
+import { Pagination, Search } from "../../components";
 import {
   useQueryDebut,
   useQueryNowPlaying,
@@ -12,6 +12,7 @@ import styles from "./MovieGrid.module.css";
 
 const MovieGrid = () => {
   const [selectedOption, setSelectedOption] = useState("2");
+  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
   const {
@@ -20,24 +21,24 @@ const MovieGrid = () => {
     refetch,
   } = useQuerySearchMovies(
     search,
-    1,
+    currentPage,
     selectedOption === "1" && search.trim() !== ""
   );
 
   const { data: top, isLoading: isLoadingTop } = useQueryTopRated(
-    1,
+    currentPage,
     selectedOption === "2"
   );
   const { data: popular, isLoading: isLoadingPopular } = useQueryPopular(
-    1,
+    currentPage,
     selectedOption === "3"
   );
   const { data: debuts, isLoading: isLoadingDebuts } = useQueryDebut(
-    1,
+    currentPage,
     selectedOption === "4"
   );
   const { data: playing, isLoading: isLoadingPlaying } = useQueryNowPlaying(
-    1,
+    currentPage,
     selectedOption === "5"
   );
 
@@ -45,22 +46,45 @@ const MovieGrid = () => {
     switch (selectedOption) {
       case "1":
         return {
-          movies: moviesSearch?.results ?? [],
+          movies: {
+            result: moviesSearch?.results ?? [],
+            totalPages: moviesSearch?.total_pages,
+          },
           isLoading: isLoadingSearch,
         };
       case "2":
-        return { movies: top?.results ?? [], isLoading: isLoadingTop };
+        return {
+          movies: { result: top?.results ?? [], totalPages: top?.total_pages },
+          isLoading: isLoadingTop,
+        };
       case "3":
-        return { movies: popular?.results ?? [], isLoading: isLoadingPopular };
+        return {
+          movies: {
+            result: popular?.results ?? [],
+            totalPages: popular?.total_pages,
+          },
+          isLoading: isLoadingPopular,
+        };
       case "4":
-        return { movies: debuts?.results ?? [], isLoading: isLoadingDebuts };
+        return {
+          movies: {
+            result: debuts?.results ?? [],
+            totalPages: debuts?.total_pages,
+          },
+          isLoading: isLoadingDebuts,
+        };
       case "5":
-        return { movies: playing?.results ?? [], isLoading: isLoadingPlaying };
+        return {
+          movies: {
+            result: playing?.results ?? [],
+            totalPages: playing?.total_pages,
+          },
+          isLoading: isLoadingPlaying,
+        };
       default:
-        return { movies: [], isLoading: false };
+        return { movies: { result: [], total_pages: 0 }, isLoading: false };
     }
   })();
-
   return (
     <div className={styles.grid}>
       <div className={styles.siverBar}>
@@ -81,7 +105,7 @@ const MovieGrid = () => {
       </h2>
       <div
         className={
-          isLoading || !movies.length
+          isLoading || !movies.result.length
             ? styles.moviesDisabled
             : styles.moviesActive
         }
@@ -90,31 +114,33 @@ const MovieGrid = () => {
           <div className={styles.containerLoader}>
             <div className={styles.loader} />
           </div>
-        ) : movies.length ? (
-          movies.map((movie) => (
-            <div key={movie.id} className={styles.movie}>
-              {movie.backdrop_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                  alt={movie.title}
-                  className={styles.movieImage}
-                />
-              ) : (
-                <div className={styles.noImage}>
-                  <h3>Sin imagen</h3>
-                </div>
-              )}
+        ) : movies.result.length ? (
+          <>
+            {movies.result.map((movie) => (
+              <div key={movie.id} className={styles.movie}>
+                {movie.backdrop_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                    alt={movie.title}
+                    className={styles.movieImage}
+                  />
+                ) : (
+                  <div className={styles.noImage}>
+                    <h3>Sin imagen</h3>
+                  </div>
+                )}
 
-              <h3 className={styles.movieTitle}>{movie.title}</h3>
-              <div className={styles.movieOverlay}>
-                <span>Calificación: {movie.vote_average}</span>
-                <span>
-                  <Star color="#FFE31A" />
-                </span>
+                <h3 className={styles.movieTitle}>{movie.title}</h3>
+                <div className={styles.movieOverlay}>
+                  <span>Calificación: {movie.vote_average}</span>
+                  <span>
+                    <Star color="#FFE31A" />
+                  </span>
+                </div>
+                <button className={styles.buttonMovie}>Ver detalles</button>
               </div>
-              <button className={styles.buttonMovie}>Ver detalles</button>
-            </div>
-          ))
+            ))}
+          </>
         ) : (
           <div className={styles.containerNoFoundMovie}>
             <h1>Sin películas</h1>
@@ -122,6 +148,13 @@ const MovieGrid = () => {
           </div>
         )}
       </div>
+      {!isLoading && (
+        <Pagination
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          totalPages={movies.totalPages || 0}
+        />
+      )}
     </div>
   );
 };
