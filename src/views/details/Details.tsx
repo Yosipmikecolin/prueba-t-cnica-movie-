@@ -32,10 +32,11 @@ const Details = () => {
               >
                 <ArrowLeft /> Atras
               </button>
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
-                width={300}
-              />
+              <div className={styles.containerImage}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
+                />
+              </div>
             </div>
 
             <div className={styles.containerDetails}>

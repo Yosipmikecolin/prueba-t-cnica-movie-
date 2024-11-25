@@ -9,6 +9,31 @@
   color: white;
 }
 
+.containerImage {
+  width: 300px;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f3f3f3 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.containerImage img {
+  width: 300px;
+  height: 500px;
+  object-fit: cover;
+}
+
 .buttonBack {
   background-color: black;
   color: white;
