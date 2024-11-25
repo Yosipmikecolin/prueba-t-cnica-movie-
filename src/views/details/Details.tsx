@@ -54,6 +54,13 @@ const Details = () => {
               >
                 Popularidad: {movie?.popularity}
               </span>
+
+              <span
+                className={styles.details}
+                style={{ backgroundColor: "#8B5DFF" }}
+              >
+                Calificación : {movie?.vote_average}
+              </span>
               <span
                 className={styles.details}
                 style={{ backgroundColor: "#3D3BF3" }}
