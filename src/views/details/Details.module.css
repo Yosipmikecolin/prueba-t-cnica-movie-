@@ -114,6 +114,9 @@
 }
 
 @media (max-width: 1193px) {
+  .containerImage {
+    margin: auto;
+  }
   .containerInfo {
     flex-direction: column;
     text-align: center;
@@ -126,7 +129,7 @@
 }
 
 @media (max-width: 622px) {
-  .containerInfo img {
+  .containerImage {
     width: 100%;
   }
 
