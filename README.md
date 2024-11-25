@@ -1,50 +1,37 @@
-# React + TypeScript + Vite
+# Prueba tecnica Frontend 🎨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación moderna de películas realizada en React.tsx que consume la API de TMDb, utilizando las últimas tecnologías.
 
-Currently, two official plugins are available:
+## Características 🛞
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interfaz de usuario moderna:** Diseñada con una interfaz de usuario minimalista y fácil de usar, que permite a los usuarios buscar y explorar películas de manera sencilla.
+- **Conexión a la API de TMDb:** La aplicación consume la API de TMDb para obtener información sobre películas, incluyendo títulos, sinopsis, imágenes y más.
+- **Búsqueda y filtrado:** Los usuarios pueden buscar películas por título y filtrar los resultados por popularidad, Estrenos o Cartelera.
+- **Detalles de la película:** Al seleccionar una película, los usuarios pueden ver detalles adicionales, como la sinopsis, generos, la duración y la calificación.
+- **Soporte para dispositivos móviles:** La aplicación es completamente responsiva y se adapta a diferentes tamaños de pantalla, lo que la hace accesible desde dispositivos móviles.
 
-## Expanding the ESLint configuration
+## Tecnologías utilizadas 🧩
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React.tsx** : La aplicación está construida utilizando React.tsx, que permite una mayor productividad y una mejor experiencia de desarrollo.
+- **TypeScript** : La aplicación utiliza TypeScript para aprovechar las ventajas de la tipificación estática y la compatibilidad con las últimas características de JavaScript.
+- **API de TMDb** : La aplicación consume la API de TMDb para obtener información sobre películas.
+- **CSS Grid y Flexbox** : La aplicación utiliza CSS Grid y Flexbox para crear una interfaz de usuario moderna y flexible.
+- **Axios:** La aplicación utiliza Axios para realizar solicitudes HTTP a la API de TMDb de manera sencilla y eficiente.
+**Zustand:** La aplicación utiliza Zustand para gestionar el estado de la aplicación de manera centralizada y escalable.
+**React Router DOM:** La aplicación utiliza React Router DOM para gestionar la navegación y la ruta de la aplicación de manera sencilla y eficiente.
+**Lucide React:** La aplicación utiliza Lucide React para agregar iconos y elementos de interfaz de usuario de manera sencilla y personalizable.
 
-- Configure the top-level `parserOptions` property like this:
+## URL desplegada 🚀
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+[https://prueba-t-cnica-movie.vercel.app/](https://prueba-t-cnica-movie.vercel.app/)
+## Requisitos Previos
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. **Node.js** instalado en tu máquina.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Variables de entorno 👈
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Es necesario que el usuario cree un archivo .env en la raíz del proyecto fuera de la carpeta src y pegue las siguientes variables de entorno antes de ejecutar la aplicación:
+
+- **VITE_URL_API_MOVIE**=https://api.themoviedb.org/3/movie
+- **VITE_URL_SEARCH_API_MOVIE**=https://api.themoviedb.org/3/search/movie?
+- **VITE_TOKEN_AUTHORIZATION**=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzhiZjZiYjQ3ZDliNzNkNTBhNDY4ODRhNWJjNWY4ZCIsIm5iZiI6MTczMjI5MTMzMi4xNzkyNzg2LCJzdWIiOiI2NzQwYTlkYTFjZDhjMjQzZTZiZTcyMDQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.g58g2tCRVgNhtFk5sR6pCAO5lDTjZvB8E5AuRnc-8ts
