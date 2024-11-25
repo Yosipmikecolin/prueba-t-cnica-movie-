@@ -7,6 +7,7 @@ interface Props {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   selectedOption: string;
   setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const options = [
@@ -22,10 +23,12 @@ const Search = ({
   setSearch,
   selectedOption,
   setSelectedOption,
+  setCurrentPage,
 }: Props) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSearch(value.trim());
+    setSearch(value);
+    setCurrentPage(1);
     refetch();
     setSelectedOption(value !== "" ? "1" : "2");
   };

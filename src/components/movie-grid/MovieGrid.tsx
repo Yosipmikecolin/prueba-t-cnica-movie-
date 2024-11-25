@@ -104,6 +104,7 @@ const MovieGrid = () => {
           setSearch={setSearch}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
+          setCurrentPage={setCurrentPage}
         />
       </div>
       <h2 className={styles.title}>
@@ -119,6 +120,10 @@ const MovieGrid = () => {
             ? styles.moviesDisabled
             : styles.moviesActive
         }
+        style={{
+          justifyContent:
+            movies.result.length < 20 ? "flex-start" : "space-between",
+        }}
       >
         {isLoading ? (
           <div className={styles.containerLoader}>
