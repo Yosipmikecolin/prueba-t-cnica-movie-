@@ -27,7 +27,7 @@ Una aplicación moderna de películas realizada en React.tsx que consume la API 
 
 ## Video de funcionamiento 📹
 
-[https://drive.google.com/file/d/1joflHfzAhwHirLlzkjjUl2eO1tgdDut8/view?usp=sharing](https://drive.google.com/file/d/1joflHfzAhwHirLlzkjjUl2eO1tgdDut8/view?usp=sharing)
+[https://drive.google.com/file/d/1GX_Ex_qq8wTDsW_VIzw7cPNyTmzcrtP5/view?usp=sharing](https://drive.google.com/file/d/1GX_Ex_qq8wTDsW_VIzw7cPNyTmzcrtP5/view?usp=sharing)
 
 ## Requisitos Previos
 
