@@ -24,6 +24,11 @@ Una aplicación moderna de películas realizada en React.tsx que consume la API 
 ## URL desplegada 🚀
 
 [https://prueba-t-cnica-movie.vercel.app/](https://prueba-t-cnica-movie.vercel.app/)
+
+## Video de funcionamiento 📹
+
+[https://drive.google.com/file/d/1joflHfzAhwHirLlzkjjUl2eO1tgdDut8/view?usp=sharing](https://drive.google.com/file/d/1joflHfzAhwHirLlzkjjUl2eO1tgdDut8/view?usp=sharing)
+
 ## Requisitos Previos
 
 1. **Node.js** instalado en tu máquina.
