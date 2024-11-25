@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pagination, Search } from "../../components";
 import {
   useQueryDebut,
@@ -16,17 +16,26 @@ const MovieGrid = () => {
   const [selectedOption, setSelectedOption] = useState("2");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState(search);
   const navigate = useNavigate();
   const { setId } = useId();
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 300);
+
+    return () => clearTimeout(handler);
+  }, [search]);
 
   const {
     data: moviesSearch,
     isLoading: isLoadingSearch,
     refetch,
   } = useQuerySearchMovies(
-    search,
+    debouncedSearch,
     currentPage,
-    selectedOption === "1" && search.trim() !== ""
+    selectedOption === "1" && debouncedSearch.trim() !== ""
   );
 
   const { data: top, isLoading: isLoadingTop } = useQueryTopRated(
